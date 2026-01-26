@@ -1,0 +1,367 @@
+/* ******************************MENU BURGER****************************** */
+
+.site-header{
+  display: flex;
+  position: fixed;
+  width: 100%;
+  max-width: 1440px;
+  height: 80px;
+  top: 0px;
+  z-index: 999;
+}
+.nav-menu {
+  display: flex !important;
+}
+
+.line {
+  position: absolute;
+  display: block;
+  background: #000;
+  width: 40px !important;
+  height: 1px !important;
+}
+
+
+
+
+/* Styles pour animer les lignes du menu burger en "X" lorsqu'il est actif */
+.l1 {
+  transform: translateY(-10px);
+}
+.l3 {
+  transform: translateY(10px);
+}
+.nav-toggler.active .l1 {
+  transform: translateY(0) rotate(135deg);
+}
+.nav-toggler.active .l2 {
+  opacity: 0;
+}
+.nav-toggler.active .l3 {
+  transform: translateY(0) rotate(-135deg);
+}
+
+/* Positionnement du bouton toggle */
+.nav-toggler {
+  position: absolute !important;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  height: 35px;
+  z-index: 10001;
+}
+
+.toggle {
+  position: absolute !important;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  height: 35px;
+}
+
+.main-navigation.menu-burger.toggle {
+  position: relative;
+  height: 80px;
+}
+
+.menu-ferme { 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Styles du corps pour le menu burger */
+body.burger {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  overflow-y: auto;
+}
+
+
+
+/* ******************************Styles par défaut lorsque le menu est ouvert****************************** */
+/**body.burger.open {    
+  max-width: 1440px;
+  width: 100%;
+  overflow: hidden;
+  animation: fadeIn 1.4s ease-out 0.4s both;
+}**/
+
+.menu-ouvert {
+  position: fixed;
+  max-width: 1440px;
+  width: 100%;
+  height: 725px !important;
+  background-color: #FFF5E9;
+  color: black;          
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease, visibility 0.5s ease;
+  display: flex;
+  flex-direction: column;          
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 9999;
+}
+
+.menu-ouvert.open {
+  opacity: 1;
+  visibility: visible;
+  animation: fadeIn 1.4s ease-out 0.4s both;
+}
+
+.menu-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-menu,
+.menu-list,
+.footer-burger {
+  position: relative;
+  z-index: 2;
+}
+
+.menu-list {
+  display: flex !important;
+  max-height: 500px;
+  gap:0px;
+  position: relative;
+  font-size: clamp(25px, 5vw, 55px);
+  overflow: auto;
+}
+
+.menu-ouvert .menu-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.menu-ouvert .menu-list li {
+  font-size: 1em;
+  line-height: 100%;  
+}
+
+.menu-ouvert ul li {
+  margin-bottom: 0; 
+}
+
+.menu-ouvert li a:hover {
+  color: black;
+  text-shadow: 0px 0px 14px #FF5C00;
+}
+
+/* ******************************Gestion de l'ouverture et fermeture du menu****************************** */
+.ouvrir {
+  display: block;
+}
+
+.fermer {
+  display: none;
+}
+
+.open .ouvrir {
+  display: none;
+}
+
+.open .fermer {
+  display: block;
+}
+
+.open .menu-ouvert {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1s ease, visibility 0.5s ease; 
+}
+
+/* ******************************Logo du menu burger****************************** */
+.logo-menu {
+  text-align: center; 
+  padding: 0 !important;
+}
+
+.logo-menu img {
+  margin-top: 2em;
+  width: 154px;
+  height: 96px;
+  height: auto;
+  animation: float-multi 10s infinite ease-in-out;
+  filter: drop-shadow(0px 0px 26.0937px rgba(255, 92, 0, 0.6));
+}
+
+/* ******************************Animation flottante des images du menu burger****************************** */
+@keyframes float-multi {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  15% {
+    transform: translate3d(0, -10px, 0) rotate(2deg);
+  }
+
+  30% {
+    transform: translate3d(0, 10px, 0) rotate(-1deg);
+  }
+
+  45% {
+    transform: translate3d(15px, 0, 0) rotate(-2deg);
+  }
+
+  60% {
+    transform: translate3d(-10px, 0, 0) rotate(1deg);
+  }
+
+  75% {
+    transform: translate3d(8px, -8px, 0) rotate(1deg);
+  }
+
+  90% {
+    transform: translate3d(-8px, 8px, 0) rotate(-2deg);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+/* ****************************** Taille du texte footer du menu burger ****************************** */
+.burger-menu-footer-link a {
+  margin-top: 20px;
+  font-size: 14px;
+  overflow: auto;
+}
+
+/* **************************Animations Images********************************** */
+
+.images-menu {
+  position: absolute;
+  height: 850px;
+  width: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+
+.images-menu img {
+  position: absolute;
+}
+
+.menu-img7 {
+  width: 172px;
+  height: 172px;
+  top: 6em;
+  left: -4em;
+  animation: rotation 10s linear infinite;
+}
+
+.menu-img4 {
+  width: 70px !important;
+  height: 70px !important;
+  top: 34em;
+  left: 17em;
+  animation: rotation 4s linear infinite;
+}
+
+.images-menu img.menu-img4 {
+  width: 5%;
+  height: auto;
+}
+
+.menu-img6 {
+  width: 216px !important;
+  height: 216px !important;
+  top: 5em;
+  right: 16em;
+  animation: rotation 5s linear infinite;
+}
+
+.images-menu img.menu-img6 {
+  width: 13%;
+  height: auto;
+}
+
+.menu-img8 {
+  width: 626px;
+  height: 626px;
+  top: 570px;
+  right: -310px;
+  animation: rotation 10s linear infinite;
+  bottom: 20em;
+}
+
+.menu-img5 {
+  width: 75px;
+  height: 75px;
+  top: 610px;
+  right: -30px;
+  animation: rotation 4s linear infinite;
+  top: 28em;
+}
+
+.menu-img3 {
+  width: 109px !important;
+  height: 109px !important;
+  top: 13em;
+  left: 20em;
+  animation: float-multi 8s 3s infinite ease-in-out;
+}
+
+.images-menu img.menu-img3 {
+  width: 10%;
+  height: auto;
+}
+
+.menu-img1 {
+  width: 105px !important;
+  height: 105px !important;
+  top: 53em;
+  left: 6em;
+  animation: float-multi 10s 2s infinite ease-in-out;
+}
+
+.images-menu img.menu-img1 {
+  width: 8%;
+  height: auto;
+}
+
+.menu-img2 {
+  width: 154px !important;
+  height: 154px !important;
+  top: 31em;
+  right: 17em;
+  animation: float-multi 12s 4s infinite ease-in-out;
+}
+
+.images-menu img.menu-img2 {
+  width: 8%;
+  height: auto;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 769px) { 
+  .menu-img1,
+  .menu-img2,
+  .menu-img3 {
+    display: none;
+  }
+}

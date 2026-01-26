@@ -6,14 +6,15 @@ get_header();
 <main id="primary" class="site-main">
   <section class="banner">
     <!--modification video background-->
-    <video autoplay muted loop playsinline class="video-bg">
-      <source src="<?php echo get_template_directory_uri() . '/assets/images/StudioKoukaki-video-header-sans-son.mp4'; ?>" type="video/mp4">
+    <video autoplay muted loop playsinline class="video-bg"
+      poster="<?php echo get_stylesheet_directory_uri() . '/images/banner.png'; ?>">
+      <source src="<?php echo get_stylesheet_directory_uri() . '/images/StudioKoukaki-video-header-sans-son.mp4'; ?>" type="video/mp4">
     </video>
-    <img src="<?php echo get_template_directory_uri() . '/assets/images/logo.png'; ?> " alt="logo Fleurs d'oranger & chats errants" class="banner-logo">
+    <img src="<?php echo get_stylesheet_directory_uri() . '/images/logo.png'; ?> " alt="logo Fleurs d'oranger & chats errants" class="banner-logo">
   </section>
-  <section id="#story" class="story">
-    <h2 class="section-title">L'histoire</h2>
-    <article id="" class="story__article">
+  <section class="story">
+    <h2 id="story" class="section-title">L'histoire</h2>
+    <article class="story__article">
       <p><?php echo get_theme_mod('story'); ?></p>
     </article>
     <?php
@@ -45,6 +46,10 @@ get_header();
       <div>
         <h3 class="section-title">Le Lieu</h3>
         <p><?php echo get_theme_mod('place'); ?></p>
+      </div>
+      <div class="nuages">
+        <img id="gros-nuage" src="<?php echo get_stylesheet_directory_uri(); ?>/images/gros_nuage.png" alt="gros nuage">
+        <img id="petit-nuage" src="<?php echo get_stylesheet_directory_uri(); ?>/images/petit_nuage.png" alt="petit nuage">
       </div>
 
     </article>

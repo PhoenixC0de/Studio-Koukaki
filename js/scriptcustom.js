@@ -1,37 +1,4 @@
-/*
-document.addEventListener("DOMContentLoaded", () => {
 
-  const titles = document.querySelectorAll('.section-title');
-
-  // 1) Découpe chaque titre en mots
-  titles.forEach(title => {
-    const words = title.textContent.trim().split(" ");
-    title.textContent = "";
-
-    words.forEach((word, index) => {
-      const span = document.createElement("span");
-      span.textContent = word + " ";
-      span.style.transitionDelay = (index * 0.12) + "s"; // effet cascade mot par mot
-      title.appendChild(span);
-    });
-  });
-
-  // 2) Observer pour déclencher l’animation
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const spans = entry.target.querySelectorAll("span");
-        spans.forEach(span => span.classList.add("visible"));
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.2
-  });
-
-  titles.forEach(title => observer.observe(title));
-
-});*/
 document.addEventListener("DOMContentLoaded", () => {
 
   const titles = document.querySelectorAll('.section-title');
@@ -47,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     words.forEach((word, i) => {
       const span = document.createElement("span");
       span.textContent = word;
-      span.style.transitionDelay = (i * 0.15) + "s";
+      span.style.transitionDelay = (i * 0.25) + "s";
       wrapper.appendChild(span);
 
       wrapper.appendChild(document.createTextNode(" "));
@@ -55,14 +22,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll(".words span").forEach(span => {
-          span.classList.add("visible");
-        });
-      }
-    });
+  entries.forEach(entry => {
+    const spans = entry.target.querySelectorAll(".words span");
+
+    if (entry.isIntersecting) {
+      // Apparition
+      spans.forEach(span => span.classList.add("visible"));
+    }
+    else {
+      // Disparition → reset
+      spans.forEach(span => span.classList.remove("visible"));
+    }
   });
+});
+
 
   titles.forEach(title => observer.observe(title));
 
@@ -86,5 +59,57 @@ window.addEventListener("scroll", () => {
   }
 });
 
+//animation des nuages 
+
+const gros = document.getElementById("gros-nuage");
+const petit = document.getElementById("petit-nuage");
+
+function animateCloud(cloud, factor = 1) {
+    const rect = cloud.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    // Si le nuage n'est pas visible - pas d'animation
+    if (rect.top > windowHeight || rect.bottom < 0) return;
+
+    // Progression dans la fenêtre
+    const progress = 1 - rect.top / windowHeight;
+
+    // Mouvement : 0px (haut) -> -300px (bas)
+    const translate = progress * -300 * factor;
+
+    cloud.style.transform = `translateX(${translate}px)`;
+}
+
+window.addEventListener("scroll", () => {
+    animateCloud(gros, 1.9);     // Gros nuage
+    animateCloud(petit, 0.9);  // Petit nuage (parallax)
+});
+
+
+
+
+// Sélectionne le bouton du menu burger et l'élément de navigation dans le DOM.
+const body = document.querySelector(".menu-ouvert");
+const burgerButton = document.querySelector(".nav-toggler");
+
+burgerButton.addEventListener("click", function () {
+    const isOpen = body.classList.toggle("open");
+
+    // Animation du bouton (croix)
+    burgerButton.classList.toggle("active", isOpen);
+
+    // Accessibilité
+    burgerButton.setAttribute("aria-expanded", isOpen);
+    burgerButton.setAttribute("aria-label", isOpen ? "Fermer le menu" : "Ouvrir le menu");
+});
+// Fermer le menu quand on clique sur un lien
+document.querySelectorAll(".menu-list a").forEach(link => {
+    link.addEventListener("click", () => {
+        body.classList.remove("open");
+        burgerButton.classList.remove("active");
+        burgerButton.setAttribute("aria-expanded", "false");
+        burgerButton.setAttribute("aria-label", "Ouvrir le menu");
+    });
+});
 
 
